@@ -200,3 +200,113 @@ find "$directory" -type f -exec shasum {} \; | sort | awk '{
 487b6170c18fa66126f0865a3e4203254b984ce3 /Users/prilepskyv/Desktop/conf/hi.c, /Users/prilepskyv/Desktop/conf/hi copy.c
 91f2c8f9b4a56e485b4bc6c16723f9faf5d7d9b9 /Users/prilepskyv/Desktop/conf/hello.c, /Users/prilepskyv/Desktop/conf/hello copy.c
 ```
+# Задача 8
+Написать программу, которая находит все файлы в данном каталоге с расширением, указанным в качестве аргумента и архивирует все эти файлы в архив tar.
+
+## Код 
+```bash
+#!/bin/bash
+
+# Проверка наличия аргументов
+if [ "$#" -ne 2 ]; then
+    echo "Использование: $0 <путь_к_каталогу> <расширение>"
+    exit 1
+fi
+
+directory="$1"
+extension="$2"
+
+# Поиск файлов с заданным расширением
+files=$(find "$directory" -type f -name "*.$extension")
+
+# Проверка на наличие найденных файлов
+if [ -z "$files" ]; then
+    echo "Файлы с расширением .$extension не найдены в $directory."
+    exit 1
+fi
+
+# Создание имени архива
+archive_name="archive.tar.gz"
+
+# Архивирование найденных файлов
+tar -czf "$archive_name" -C "$directory" $(basename $files)
+
+echo "Архив создан: $archive_name"
+
+```
+
+```bash
+./archive_files.sh ~/Desktop/conf c 
+Архив создан: archive.tar.gz
+```
+
+# Задача 9
+Написать программу, которая заменяет в файле последовательности из 4 пробелов на символ табуляции. Входной и выходной файлы задаются аргументами.
+## Код
+```bash
+#!/bin/bash
+
+# Проверка наличия аргументов
+if [ "$#" -ne 2 ]; then
+    echo "Использование: $0 <входной_файл> <выходной_файл>"
+    exit 1
+fi
+
+input_file="$1"
+output_file="$2"
+
+# Замена 4 пробелов на символ табуляции и запись в выходной файл
+sed 's/    /\t/g' "$input_file" > "$output_file"
+
+echo "Заменено в файле $input_file и записано в $output_file."
+
+```
+```bash
+./replace_spaces.sh input.txt output.txt
+Заменено в файле input.txt и записано в output.txt.
+```
+intpu.txt
+```bash
+   //123
+        //123
+        //123
+            //123
+```
+output.txt
+```bash
+	//123
+		//123
+		//123
+			//123
+```
+
+
+# Задача 10
+Написать программу, которая выводит названия всех пустых текстовых файлов в указанной директории. Директория передается в программу параметром.
+## Код
+```bash
+#!/bin/bash
+
+# Проверка наличия аргумента
+if [ "$#" -ne 1 ]; then
+    echo "Использование: $0 <путь_к_каталогу>"
+    exit 1
+fi
+
+directory="$1"
+
+# Проверка, существует ли директория
+if [ ! -d "$directory" ]; then
+    echo "Ошибка: Директория $directory не найдена."
+    exit 1
+fi
+
+# Поиск и вывод пустых текстовых файлов
+find "$directory" -type f -name "*.txt" -size 0 | while read -r file; do
+    echo "$file"
+done
+```
+```bash
+./find_empty_files.sh ~/Desktop/conf 
+/Users/prilepskyv/Desktop/conf/file.txt
+```
