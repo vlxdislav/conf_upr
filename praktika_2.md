@@ -63,6 +63,14 @@ published 3 weeks ago by wesleytodd <wes@wesleytodd.com>
 git clone https://github.com/expressjs/express.git
 cd express
 ```
+## Задача 3
+Сформировать graphviz-код и получить изображения зависимостей matplotlib, express
+```bash
+pipdeptree --packages matplotlib --graph-output dot > matplotlib_deps.dot
+```
+![image](https://github.com/user-attachments/assets/7a2c4c7a-74d9-4ed3-acd3-734d63041cd8)
+
+
 
 ## Задача 4
 Решить на MiniZinc задачу о счастливых билетах. Добавить ограничение на то, что все цифры билета должны быть различными (подсказка: используйте all_different). Найти минимальное решение для суммы 3 цифр.
