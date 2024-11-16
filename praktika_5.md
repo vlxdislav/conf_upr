@@ -57,3 +57,78 @@ def foo(x):
     return (x * 10) + 42
 ```
 
+### Задача 2
+Что делает следующий байткод (опишите шаги его работы)? Это известная функция, назовите ее.
+```bash
+  5           0 LOAD_CONST               1 (1)
+              2 STORE_FAST               1 (r)
+
+  6     >>    4 LOAD_FAST                0 (n)
+              6 LOAD_CONST               1 (1)
+              8 COMPARE_OP               4 (>)
+             10 POP_JUMP_IF_FALSE       30
+
+  7          12 LOAD_FAST                1 (r)
+             14 LOAD_FAST                0 (n)
+             16 INPLACE_MULTIPLY
+             18 STORE_FAST               1 (r)
+
+  8          20 LOAD_FAST                0 (n)
+             22 LOAD_CONST               1 (1)
+             24 INPLACE_SUBTRACT
+             26 STORE_FAST               0 (n)
+             28 JUMP_ABSOLUTE            4
+
+  9     >>   30 LOAD_FAST                1 (r)
+             32 RETURN_VALUE
+```
+
+```bash
+LOAD_CONST 1 (1) и STORE_FAST 1 (r)
+Загружается константа 1 и сохраняется в локальную переменную r.
+Python-эквивалент: r = 1.
+
+LOAD_FAST 0 (n) и LOAD_CONST 1 (1)
+Загружается локальная переменная n и константа 1.
+Python-эквивалент: подготовка к сравнению n > 1.
+
+COMPARE_OP 4 (>)
+Выполняется сравнение n > 1.
+Если результат ложный, происходит переход на инструкцию по адресу 30 (завершение функции).
+Python-эквивалент: if n <= 1: return r.
+
+LOAD_FAST 1 (r) и LOAD_FAST 0 (n)
+Загружаются r и n для последующей операции умножения.
+Python-эквивалент: r *= n.
+
+INPLACE_MULTIPLY и STORE_FAST 1 (r)
+Вычисляется произведение r * n, и результат сохраняется обратно в r.
+Python-эквивалент: r *= n.
+
+LOAD_FAST 0 (n) и LOAD_CONST 1 (1)
+Загружается n и константа 1 для выполнения операции вычитания.
+Python-эквивалент: n -= 1.
+
+INPLACE_SUBTRACT и STORE_FAST 0 (n)
+Вычисляется n - 1, и результат сохраняется обратно в n.
+Python-эквивалент: n -= 1.
+
+JUMP_ABSOLUTE 4
+Переход обратно к началу цикла (инструкция на адресе 4).
+Python-эквивалент: переход к началу цикла while n > 1.
+
+LOAD_FAST 1 (r) и RETURN_VALUE
+Загружается значение r и возвращается как результат функции.
+Python-эквивалент: return r.
+
+```
+Этот байткод реализует вычисление факториала числа n. Эквивалентная функция на Python выглядит так:
+```bash
+def factorial(n):
+    r = 1
+    while n > 1:
+        r *= n
+        n -= 1
+    return r
+```
+
