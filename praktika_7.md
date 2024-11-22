@@ -46,3 +46,63 @@ deactivate P
 @enduml
 ```
 ![Снимок экрана 2024-11-22 в 14 47 33](https://github.com/user-attachments/assets/b63e96d0-ef98-4010-8270-8cb4d0f23f2e)
+
+### Задача 3
+
+Описать какой-либо алгоритм сортировки с помощью noweb. Язык реализации не важен. Прислать nw-файл, pdf-файл и файл с исходным кодом. В начале pdf-файла должно быть указано ваше авторство. Добавьте, например, где-то в своем тексте сноску: \footnote{Разработал Фамилия И.О.) Дополнительное задание: сравните "грамотное программирование" с Jupyter-блокнотами (см.
+https://github.com/norvig/pytudes/blob/master/ipynb/BASIC.ipynb), опишите сходные черты, различия, перспективы того и другого.
+
+nw файл (sorting_algorithm.nw):
+```bash
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+\title{Сортировка пузырьком}
+\author{Прилепский Владислав Валерьевич}
+\date{\today}
+\maketitle
+
+\section*{Описание}
+Алгоритм сортировки пузырьком состоит из многократного прохода по списку, во время которого соседние элементы сравниваются и меняются местами, если они стоят в неправильном порядке. Процесс продолжается до тех пор, пока список не будет полностью отсортирован.
+
+\section*{Исходный код}
+\begin{verbatim}
+<<*>>=
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+@
+\end{verbatim}
+
+\footnote{Разработал Прилепский Владислав Валерьевич.}
+
+\end{document}
+```
+
+исходный код:
+```bash
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        # Проход по массиву, уменьшая зону проверки на каждом шаге
+        for j in range(0, n-i-1):
+            # Если текущий элемент больше следующего, меняем их местами
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+```
+pdf-файл:
+[code2pdf_674084bca0a59.pdf](https://github.com/user-attachments/files/17870833/code2pdf_674084bca0a59.pdf)
+
+
+
+
+
+
+
+
