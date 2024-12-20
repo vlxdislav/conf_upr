@@ -1,0 +1,21 @@
+{
+  "name": "npm-graph-visualizer",
+  "version": "1.0.0",
+  "description": "A command-line tool to visualize npm package dependencies using Graphviz",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "npm",
+    "dependencies",
+    "graphviz",
+    "visualization"
+  ],
+  "author": "vladislav",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}
